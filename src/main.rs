@@ -45,30 +45,33 @@ fn main() {
     // Prompt includeCss, "Include CSS? (Y/N) (default y): "
     let include_css: bool = get_y_or_n("Include CSS? (Y/N) (default y): ");
 
+    let script: String = if include_js {
+        "\n        <script src=\"./js/main.js\"></script>".to_string()
+    } else {
+        "".to_string()
+    };
+
+    let css: String = if include_css {
+        "\n        <link rel=\"stylesheet\" href=\"./css/index.css\">".to_string()
+    } else {
+        "".to_string()
+    };
+
     // Write the top level of HTML to sitename/index.html
-    // <!DOCTYPE html>
-    // <html lang="en">
-    //   <head>
-    //     <meta charset="UTF-8" />
-    //     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    //     <meta name="author" content={author} />
+    let index_content = format!(
+        r#"<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="{0}" />{1}
+        <title>{2}</title>
+    </head>
+    <body>{3}
+    </body>
+</html>"#,
+        author, css, sitename, script
+    );
 
-    // if includeCss
-    // create file in sitename/css/index.css
-    // then write to sitename/index.html
-    // <link rel="stylesheet" href="./css/index.css">
-
-    // Continue writing the rest
-    //     <title>Document</title>
-    //   </head>
-    //   <body>
-
-    // if includeJs
-    // create file in sitename/js/main.js
-    // then write to sitename/index.html
-    // <script src="./js/main.js"></script>
-
-    // then write the rest
-    // </body>
-    // </html>
+    println!("{}", index_content);
 }
