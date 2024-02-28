@@ -27,6 +27,7 @@ fn main() {
     // Prompt sitename, "Site name: "
     let sitename: String = get_input("Site name: ");
     // Prompt author, "Author: "
+    let author: String = get_input("Author: ");
     // Prompt includeJs, "Include Javascript? (Y/N) (default y): "
     // Prompt includeCss, "Include CSS? (Y/N) (default y): "
 
