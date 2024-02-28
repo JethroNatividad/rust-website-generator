@@ -93,6 +93,8 @@ fn main() {
 
     // Create file in ./sitename/index.html
     create_file(&format!("./{0}/index.html", sitename), &index_content);
+    create_file(&format!("./{0}/css/index.css", sitename), &"".to_string());
+    create_file(&format!("./{0}/js/main.js", sitename), &"".to_string());
 
     println!("{}", index_content);
 }
