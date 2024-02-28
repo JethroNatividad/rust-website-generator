@@ -1,5 +1,7 @@
+use std::fs::{create_dir_all, File};
 use std::io;
 use std::io::Write;
+use std::path::Path;
 
 // A program that generates a website skeleton
 // Inputs: site name, author name, javascript?, css?
@@ -33,6 +35,21 @@ fn get_y_or_n(prompt: &str) -> bool {
             _ => println!("Invalid Input"),
         }
     }
+}
+
+fn create_file(path: &String, content: &String) {
+    // Convert the file path to a Path instance
+    let path = Path::new(path);
+
+    // Extract the directory path
+    if let Some(dir) = path.parent() {
+        // Create the directory if it doesn't exist
+        create_dir_all(dir).unwrap();
+    }
+
+    // Create the file
+    let mut file = File::create(path).unwrap();
+    writeln!(file, "{}", content).unwrap();
 }
 
 fn main() {
@@ -73,6 +90,9 @@ fn main() {
 </html>"#,
         author, css, sitename, script
     );
+
+    // Create file in ./sitename/index.html
+    create_file(&format!("./{0}/index.html", sitename), &index_content);
 
     println!("{}", index_content);
 }
