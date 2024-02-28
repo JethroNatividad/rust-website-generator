@@ -67,7 +67,8 @@ fn main() {
         <meta name="author" content="{0}" />{1}
         <title>{2}</title>
     </head>
-    <body>{3}
+    <body>
+        <h1>Hello World!</h1>{3}
     </body>
 </html>"#,
         author, css, sitename, script
