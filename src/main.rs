@@ -23,13 +23,27 @@ fn get_input<T: std::str::FromStr>(prompt: &str) -> T {
     }
 }
 
+fn get_y_or_n(prompt: &str) -> bool {
+    loop {
+        let input: String = get_input(prompt);
+        match input.to_lowercase().as_str() {
+            "y" => return true,
+            "n" => return false,
+            "" => return true,
+            _ => println!("Invalid Input"),
+        }
+    }
+}
+
 fn main() {
     // Prompt sitename, "Site name: "
     let sitename: String = get_input("Site name: ");
     // Prompt author, "Author: "
     let author: String = get_input("Author: ");
     // Prompt includeJs, "Include Javascript? (Y/N) (default y): "
+    let include_js: bool = get_y_or_n("Include Javascript? (Y/N) (default y): ");
     // Prompt includeCss, "Include CSS? (Y/N) (default y): "
+    let include_css: bool = get_y_or_n("Include CSS? (Y/N) (default y): ");
 
     // Write the top level of HTML to sitename/index.html
     // <!DOCTYPE html>
